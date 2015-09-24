@@ -29,13 +29,13 @@ which controls the rooms not to join on reboot.
 ## Sample Interaction
 
 ```
-user1>> hubot leave
+user1>> @hubot leave
 hubot>> It's alright user1, I understand...
 hubot left the room 
 ```
 
 ```
-user1>> hubot stay
+user1>> @hubot stay
 hubot>> Of course! However, I may have to leave for just a moment...
 hubot left the room 
 hubot joined the room 

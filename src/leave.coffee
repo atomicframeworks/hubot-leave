@@ -42,25 +42,18 @@ module.exports = (robot) ->
   
   # Get the Heroku environment variables / config
   getConfigs = ->
-    robot.logger.info "Sending GET request for configs"
     configRequst().get()
   
   # Patch / update the Heroku environment variables / config
   patchConfig = (data) ->
-    robot.logger.info "Sending PATCH request for configs", data
     configRequst().patch data
     
   sendPatch = (data) ->
-    robot.logger.info "SENDING PATCH patch", data
     patchConfig(data) (err, res, body) ->
-      robot.logger.info "patch clalback"
-
       if err
         msg.send "Encountered an error :("
         robot.logger.error "hubot-leave: Failed to patch Heroku Config", err
         return
-      else
-        robot.logger.info "Sent patch"
   
   # Must have both config variables to continue
   if (herokuEmail && herokuPassword)
@@ -84,13 +77,12 @@ module.exports = (robot) ->
           roomArray.splice(roomArray.indexOf(msgInfo.roomJid), 1)
 
           data = JSON.stringify {HUBOT_HIPCHAT_ROOMS_BLACKLIST: roomArray.join(',')}
-          msg.send "Of course! However, I may have to leave for just a moment..."
+          msg.send "Of course! However, I have to leave for a moment..."
           sendPatch data
         else
           msg.send "Of course!"
 
     robot.respond /leave/i, (msg) ->
-      robot.logger.info "Responding to leave"
       # Get some misc info from the msg object
       msgInfo = getMsgInfo msg
 
